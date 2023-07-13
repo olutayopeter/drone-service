@@ -3,7 +3,6 @@ package com.blusalt.drone.controller;
 
 import com.blusalt.drone.dto.request.DroneRequest;
 import com.blusalt.drone.dto.request.MedicationRequest;
-import com.blusalt.drone.dto.response.DroneMedicationResponse;
 import com.blusalt.drone.dto.response.DroneRegistrationResponse;
 import com.blusalt.drone.dto.response.GenericResponse;
 import com.blusalt.drone.service.DroneService;
@@ -12,7 +11,6 @@ import com.blusalt.drone.service.ResponseStatus;
 import com.blusalt.drone.util.AppUtils;
 import com.google.gson.Gson;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -51,11 +49,6 @@ public class DroneController {
             droneRegistrationResponse.setResponseCode(ResponseStatus.FIELD_MISSING_RESP_CODE.getValue());
             droneRegistrationResponse.setResponseStatus(ResponseStatus.FAILED_STATUS.getValue());
             droneRegistrationResponse.setResponseMessage(ResponseStatus.FIELD_MISSING_RESP_MSG.getValue());
-
-//            jsonObject.put("responseCode", ResponseStatus.FIELD_MISSING_RESP_CODE.getValue());
-//            jsonObject.put("responseStatus", ResponseStatus.FAILED_STATUS.getValue());
-//            jsonObject.put("responseMessage", ResponseStatus.FIELD_MISSING_RESP_MSG.getValue());
-//            jsonObject.put("registrationResponse",(Object) null);
 
             return ResponseEntity.accepted().body(gson.fromJson(objectMapper.writeValueAsString(droneRegistrationResponse),DroneRegistrationResponse.class));
 

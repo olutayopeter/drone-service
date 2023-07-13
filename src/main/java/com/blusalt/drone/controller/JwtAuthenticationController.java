@@ -42,12 +42,6 @@ public class JwtAuthenticationController {
 	public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest jwtRequest) {
 
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		if (encoder.matches("blusalt", jwtRequest.getPassword())) {
-			log.info("encoder: true");
-		} else {
-
-			log.info("encoder: error");
-		}
 
 		try {
 			authenticate(jwtRequest.getUsername(), jwtRequest.getPassword());
