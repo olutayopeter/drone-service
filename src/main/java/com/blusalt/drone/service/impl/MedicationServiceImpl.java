@@ -94,7 +94,6 @@ public class MedicationServiceImpl implements MedicationService {
                 return ResponseEntity.accepted().body(gson.fromJson(objectMapper.writeValueAsString(droneMedicationResponse), GenericResponse.class));
             }
 
-            List<Medication>  medications = null;
             List<Medication> medicationList = new ArrayList<>(medicationRequests.size());
             for (MedicationRequest medicationRequest : medicationRequests) {
                 Integer weight = medicationRequest.getWeight();
@@ -104,12 +103,11 @@ public class MedicationServiceImpl implements MedicationService {
                 medication.setWeight(weight);
                 medication.setName(medicationRequest.getName());
                 medication.setDrone(drone);
+                log.info(" medication " +  medication);
 
                 medicationList.add(medication);
+                log.info(" medicationList " +  medicationList.toString());
 
-                drone.setState(State.LOADED);
-                entityManager.persist(drone);
-                medications = medicationRepository.saveAll(medicationList);
             }
 
             if (drone.getWeightLimit() < totalWeight) {
@@ -121,9 +119,9 @@ public class MedicationServiceImpl implements MedicationService {
                 return ResponseEntity.accepted().body(gson.fromJson(objectMapper.writeValueAsString(droneMedicationResponse), GenericResponse.class));
             }
 
-//            drone.setState(State.LOADED);
-//            entityManager.persist(drone);
-//            List<Medication>  medications = medicationRepository.saveAll(medicationList);
+            drone.setState(State.LOADED);
+            entityManager.persist(drone);
+            List<Medication>  medications = medicationRepository.saveAll(medicationList);
 
             if(!medications.isEmpty() || medications.size() > 0) {
 

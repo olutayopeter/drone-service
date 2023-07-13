@@ -21,17 +21,13 @@ public class MedicationRequest {
 
         @NotBlank
         @Length(min = 1, max = 400)
-        // @Regex(required = true, regex = "^[\\w\\-]+$")
         private String name;
 
-
-        @NotNull(message = "value is required")
         @Positive()
         private Integer weight;
 
         @NotBlank
         @Length(min = 1, max = 400)
-        // @Regex(required = true, regex = "^[\\dA-Z_]+$")
         private String code;
 
         @NotBlank
